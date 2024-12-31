@@ -51,4 +51,5 @@ A list of simple svg file collected that this library supports and can work with
 
    In simple terms: I tried, and I failed...
 2. For anyone who is willing to suggest/edit/improve on source code, I am more than wellcome
-3. This project is GPL licenced.
+## Licence
+This project is licensed under the GPL License - see the [LICENCE](LICENCE.txt) file for details.
