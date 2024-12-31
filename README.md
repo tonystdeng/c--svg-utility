@@ -28,11 +28,11 @@ Gui explaination:
 
 ## File system explain
 ### Sources files - "src/"
-- `svglib.hpp/svglib.cpp`:
+- `svglib.hpp`/`svglib.cpp`:
   Includs all svg utilities provided, tested, and useable.
-- `main.cpp/view.hpp/view.cpp`:
+- `main.cpp`/`view.hpp`/`view.cpp`:
   A simple sfml program for displaying utilty results for testing purposes.
-- `svgtran.hpp/svgtran.cpp`:
+- `svgtran.hpp`/`svgtran.cpp`:
   Utilities for svg's transform attribute. **Note: not implemented**
 ### SVG files - "svgs/"
 A list of simple svg file collected that this library supports and can work with for testing purposes.
