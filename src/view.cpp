@@ -11,8 +11,8 @@ Game::Game(char * path)
     sl::printInfo(fileinfo); // testing
     std::vector<sl::pointgraph> parts=sl::svg2points(fileinfo);
 
-    std::array<double, 6> repoinfo=sl::getrepoinfo(parts,std::min({width,height}));
-    double xmax=repoinfo[0],xmin=repoinfo[1],ymax=repoinfo[2],ymin=repoinfo[3],resRate=repoinfo[5];
+    std::array<double, 7> repoinfo=sl::getrepoinfo(parts,std::min({width,height}));
+    double xmax=repoinfo[0],xmin=repoinfo[1],ymax=repoinfo[2],ymin=repoinfo[3],resRate=repoinfo[6];
     double reposition=std::min({width,height})*0.1;
 
     parts=sl::resizeRepo(parts,xmin-reposition,ymin-reposition,resRate);
