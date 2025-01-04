@@ -183,9 +183,8 @@ std::vector<sl::pointgraph> sl::svg2points(svginfo fileinfos)
     return returns;
 }
 
-std::array<double, 6> sl::getrepoinfo(std::vector<pointgraph> parts,double width)
+std::array<double, 7> sl::getrepoinfo(std::vector<pointgraph> parts,double width)
 {
-    double largest=0;
     double xmax=0,xmin=0,ymax=0,ymin=0;
     for (pointgraph points:parts){
         for (point i:points){
@@ -193,9 +192,9 @@ std::array<double, 6> sl::getrepoinfo(std::vector<pointgraph> parts,double width
             if (i[1]>ymax){ymax=i[1];} else if (i[1]<ymin){ymin=i[1];}
         }
     }
-    largest=std::max({std::abs(xmax)-std::abs(xmin),std::abs(ymax)-std::abs(ymin)});
-    double resoRate=width/largest*0.8;
-    return {xmax,xmin,ymax,ymin,largest,resoRate};
+    double xlargest=std::abs(xmax)-std::abs(xmin),ylargest=std::abs(ymax)-std::abs(ymin);
+    double resoRate=width/std::max({xlargest,ylargest})*0.8;
+    return {xmax,xmin,ymax,ymin,xlargest,ylargest,resoRate};
 }
 
 std::vector<sl::pointgraph> sl::resizeRepo(std::vector<pointgraph> parts,double xmin,double ymin,double resRate)
