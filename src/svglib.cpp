@@ -170,6 +170,45 @@ void sl::trans2vector(transforminfo& returns, std::vector<std::string> commands)
     }   
 }
 
+
+std::vector<sl::pointgraph> sl::svg2points(svginfo fileinfos)
+{
+    std::vector<pointgraph> returns;
+    point *travelPtr=nullptr;
+    for (int i=0;i<fileinfos.size();i++){
+        std::vector<pointgraph> newParts=getPointGraph(fileinfos[i],travelPtr);
+        returns.insert(returns.end(),newParts.begin(),newParts.end());
+    }
+
+    return returns;
+}
+
+std::array<double, 6> sl::getrepoinfo(std::vector<pointgraph> parts,double width)
+{
+    double largest=0;
+    double xmax=0,xmin=0,ymax=0,ymin=0;
+    for (pointgraph points:parts){
+        for (point i:points){
+            if (i[0]>xmax){xmax=i[0];} else if (i[0]<xmin){xmin=i[0];}
+            if (i[1]>ymax){ymax=i[1];} else if (i[1]<ymin){ymin=i[1];}
+        }
+    }
+    largest=std::max({std::abs(xmax)-std::abs(xmin),std::abs(ymax)-std::abs(ymin)});
+    double resoRate=width/largest*0.8;
+    return {xmax,xmin,ymax,ymin,largest,resoRate};
+}
+
+std::vector<sl::pointgraph> sl::resizeRepo(std::vector<pointgraph> parts,double xmin,double ymin,double resRate)
+{// for this and some other functions, name "parts" is used for original, cus i copied the code and i'm too lazy to change
+    std::vector<pointgraph> returns;
+    for (pointgraph points:parts){
+        pointgraph temp;
+        for (std::array<double,2>i:points){
+            temp.push_back({((i[0]-xmin)*resRate),((i[1]-ymin)*resRate)});
+        }returns.push_back(temp);
+    }return returns;
+}
+
 std::vector<sl::pointgraph> sl::getPointGraph(std::pair<pathinfo,transforminfo> info, point* globalPtr)
 {
     std::vector<sl::pointgraph> returns;
@@ -218,8 +257,8 @@ std::vector<sl::pointgraph> sl::getPointGraph(std::pair<pathinfo,transforminfo> 
         if (relitive){
             for (int i =0;i<temp.size();i++)
             {temp[i][0]+=travelPtr[0];temp[i][1]+=travelPtr[1];}
-        }if (i.first!='q'&&i.first!='g'){temp.insert(temp.begin(),travelPtr);}
-
+        }
+        temp.insert(temp.begin(),travelPtr);
         temp=bcgpg(temp);
         traveledPtrs.insert(traveledPtrs.end(),temp.begin(),temp.end());
     }
