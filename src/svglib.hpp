@@ -54,7 +54,7 @@ namespace sl{
     std::vector<pointgraph> svg2points(svginfo);// using getPointGraph, loop through svginfo
     std::array<double, 6> getrepoinfo(std::vector<pointgraph>,double);// get reposition info, 
     // ^{xmax,xmin,ymax,ymin,largest,resoRate}
-    std::vector<pointgraph> resizeRepo(std::vector<pointgraph>,double=0,double=0,double=0);
+    std::vector<pointgraph> resizeRepo(std::vector<pointgraph>,double=0,double=0,double=1);
     // input list: original, xmin,ymin,resRate; fuc name: resize + reposition
 
 
