@@ -50,6 +50,14 @@ namespace sl{
     pointgraph eagpg(std::vector<double>,point,bool,point* travel=nullptr);// stands for Elliptical Arc get point graph
     pointgraph simplify(pointgraph,double=1.5,double=12,double=160);// simplify pointgraph
 
+    // the following function are moved from view.cpp, thought can use them more commonly
+    std::vector<pointgraph> svg2points(svginfo);// using getPointGraph, loop through svginfo
+    std::array<double, 6> getrepoinfo(std::vector<pointgraph>,double);// get reposition info, 
+    // ^{xmax,xmin,ymax,ymin,largest,resoRate}
+    std::vector<pointgraph> resizeRepo(std::vector<pointgraph>,double=0,double=0,double=0);
+    // input list: original, xmin,ymin,resRate; fuc name: resize + reposition
+
+
     void printInfo(svginfo);// print all svg info in console
     // void printPtrGraph(pointgraph);// print all pointgraph info in console
     pointgraph array2Ptr(std::vector<double>);
